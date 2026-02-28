@@ -1,0 +1,84 @@
+//src/scss/blocks/_contact.scss
+@use '../helpers/index' as *;
+
+.contact {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(72); // [FIX] было rem(300) — чрезмерно, снижено для нормального макета
+    margin: 0 auto;
+    width: 80%;
+
+    // [NOTE] если хелпер tablet недоступен, можно заменить на @media (max-width: 1024px)
+    @include tablet {
+      gap: 0;
+      grid-template-columns: 1fr;
+      width: 100%; // [FIX] на узких экранах контейнер разворачивается на всю ширину
+    }
+  }
+
+  &__info  {
+    display: grid;
+    gap: rem(16); // [FIX] чуть больше, чтобы пунктам было легче дышать
+    color: var(--text);
+
+      @include tablet {
+      gap: 0;
+    }
+  }
+}
+
+/* --- ЕДИНЫЙ РЯД: иконка + текст/ссылка --- */
+
+.contacts-column {
+  display: flex;                 // Обеспечиваем использование flex
+  flex-direction: column;        // Строки располагаются по колонкам
+  gap: rem(10);                  // Применяем gap для элементов внутри контейнера
+  align-items: flex-start;
+
+  @include tablet {
+      gap: 0;
+  }
+
+}
+
+.contacts-item {
+  display: flex;                // [FIX] все пункты — в одну строку
+  align-items: center;          // [FIX] вертикальное выравнивание
+  gap: rem(12);
+  line-height: 1.4;
+}
+
+.icon-container {
+  flex: 0 0 rem(32);            // [FIX] фиксированная зона под иконку
+  width: rem(32);
+  height: rem(32);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-icon {
+  width: rem(24);               // [FIX] унифицированный размер иконок
+  height: rem(24);
+  object-fit: contain;
+  display: block;
+}
+
+.contacts-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;          // [FIX] телефон/почта без разрыва
+
+  @include hover { text-decoration: underline; }
+}
+
+/* Адаптив: стекируем колонки */
+@media (max-width: 767.98px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: rem(0);
+    width: 100%;
+  }
+}
+

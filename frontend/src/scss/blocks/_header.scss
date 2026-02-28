@@ -1,0 +1,235 @@
+//src/scss/blocks/_header.scss
+@use '../helpers/index' as *;
+
+.logo-block {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: rem(10);
+}
+//.logo__title {
+//}
+  .logo__text {
+
+    @include tablet {
+      font-size: rem(11);
+  }
+  }
+
+.header {
+  position: sticky;
+  z-index: 1100;
+  top: 0;
+
+  &__body {
+    padding-block: rem(10);
+    background-color: var(--bg-color-nav);
+
+    @include mobile-xs {
+      padding-block: 0;
+    }
+
+    &-inner {
+      /* ЕДИНАЯ сетка для всех брейкпоинтов */
+      display: grid;
+      grid-template-columns: auto 1fr auto; // logo | center | right
+      grid-template-areas: "logo menu cta";
+      align-items: center; // вертикальное выравнивание все по одной линии
+      column-gap: rem(16);
+      position: relative;
+      min-height: rem(64); /* чтобы вертикально не прыгало */
+    }
+  }
+
+  /* ПРАВАЯ «Связаться» колонка: кнопка (десктоп) / центр (мобила) */
+  &__contact-btn
+  {
+    grid-area: cta; /* на десктопе справа */
+    justify-self: end;
+    height: rem(44);
+    padding: 0 rem(16);
+    border-radius: var(--border-radius);
+    border: var(--border-default);
+    background: var(--bg-color-nav);
+    color: var(--color-text-body);
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform .08s ease, opacity .2s ease;
+    line-height: 1; /* выравнивание по вертикали */
+    text-transform: uppercase;
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+      background-color: var(--bg-color-body);
+      transform: translateY(-2px);
+    }
+    &:active {
+      transform: translateY(1px);
+    }
+
+    @include mobile-xs {
+      margin-right: rem(120);
+    }
+
+    @include mobile-md {
+      margin: 0 rem(52) 0 rem(10);
+      font-size: rem(10);
+      padding: 0 rem(10);
+    }
+  }
+
+  /* Бургер — на десктопе скрывается твоим классом, но в сетке он справа */
+  .burger-button {
+    grid-area: cta;
+    justify-self: end;
+    align-self: center;
+    line-height: 1;
+  }
+
+  /* МОБИЛЬНАЯ верхняя полоса: logo | button | burger */
+  @include mobile-xs {
+    &__body-inner {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "logo cta burger";
+      column-gap: rem(12);
+      padding: rem(10) rem(3) rem(10) rem(10);
+    }
+
+    .header__contact-btn {
+      justify-self: center;
+      height: rem(40);
+      padding: 0 rem(14);
+    }
+  }
+
+  /* Контейнер верхней полосы: на мобиле делаем grid 3 колонки */
+  @include mobile-xs {
+    &__body-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto; // logo | center | burger
+      align-items: center;
+      column-gap: 0;
+    }
+  }
+
+  /* ЦЕНТР: overlay с меню строго в центре */
+
+  &__overlay {
+    grid-area: menu;
+    justify-self: center; /* центр по горизонтали в колонке */
+    z-index: 1;
+
+    @include mobile-xs-above {
+      display: block;
+    }
+    /* важно: НЕ contents */
+
+    @include mobile-xs {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      row-gap: 3rem;
+      padding: 1rem;
+      background-color: var(--bg-color-mobile);
+      transition-duration: var(--transition-duration);
+      &:not(.is-active) {
+        @include hide;
+        translate: 100%;
+      }
+    }
+  }
+
+  &__menu {
+    margin-right: 0 !important;
+
+    @include mobile-xs {
+      overflow-y: auto;
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      justify-content: center; // ← центрируем пункты
+      column-gap: rem(16);
+
+      @include laptop-md {
+        column-gap: rem(8);
+      }
+      @include tablet {
+        font-size: rem(12);
+        column-gap: rem(0);
+      }
+      @include mobile-xs {
+        flex-direction: column;
+        row-gap: rem(64);
+      }
+    }
+
+    .header__menu-link {
+      padding: rem(14) rem(24);
+      transition: transform 0.25s ease, color 0.25s ease;
+      color: var(--color-text-body);
+      display: inline-block;
+
+      @include laptop-md {
+        padding: rem(10) rem(18);
+      }
+
+     @include tablet-above {
+        padding: rem(10) rem(10);
+
+      }
+
+      @include tablet {
+
+        padding: rem(3) rem(5);
+      }
+      @include mobile-xs {
+        font-size: rem(30);
+        font-weight: 700;
+      }
+
+      /* --- Активная ссылка --- */
+      &.is-active {
+        color: var(--color-text-body);
+        font-weight: 500;
+        background-color: var(--bg-color-nav);
+        pointer-events: auto; // разрешаем клик
+
+     @include tablet-above {
+        padding: rem(10) rem(10);
+      }
+        @include mobile-xs {
+        font-size: rem(30);
+        font-weight: 700;
+      }
+      }
+
+      /* --- Hover / Active эффекты --- */
+      @include hover {
+        font-weight: 500;
+        transform: translateY(rem(-2)); // лёгкий сдвиг вверх
+      }
+
+      &:active {
+        transform: translateY(rem(1)); // лёгкий отклик при клике
+      }
+    }
+  }
+
+  &__contact-us-link {
+    @include mobile-xs {
+      width: 100%;
+      max-width: rem(300);
+      align-self: center;
+    }
+  }
+}
+
+.logo__image {
+  width: rem(64);
+}

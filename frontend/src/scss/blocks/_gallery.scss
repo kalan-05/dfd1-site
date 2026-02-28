@@ -1,0 +1,116 @@
+﻿//src/scss/blocks/_gallery.scss
+
+@use '../helpers/index' as *;
+
+.gallery {
+  .gallery__swiper { position: relative; }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery__figure {
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto minmax(rem(44), auto);
+    align-items: start;
+    gap: rem(8);
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-block);
+  }
+
+  .gallery__caption--stack {
+    display: flex;
+    flex-direction: column;
+    gap: rem(2);
+    min-height: rem(44);
+    color: var(--color-text-body);
+    @include fluid-text(14, 13);
+  }
+
+  .spin {
+    display: block;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .gallery__controls {
+    margin-top: rem(20);
+    display: flex;
+    justify-content: center;
+    gap: rem(16);
+    flex-wrap: wrap;
+  }
+
+  .gallery__control {
+    border: var(--border-input);
+    border-radius: var(--border-radius);
+    background: var(--color-light);
+    color: var(--color-text-body);
+    padding: rem(10) rem(16);
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .gallery__control:hover {
+    transform: translateY(rem(-1));
+    box-shadow: var(--shadow-block);
+  }
+
+  // Legacy swiper arrows (kept for compatibility if re-enabled)
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: rem(44);
+    height: rem(44);
+    border: none;
+    background: none;
+    color: var(--color-text-body);
+    opacity: 0.9;
+    transition: transform .2s ease, opacity .2s ease;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    padding: rem(16);
+  }
+
+  .zoomed-image {
+    max-width: min(1200px, 95vw);
+    max-height: 90vh;
+    transition: transform 0.3s ease;
+    border-radius: rem(10);
+    cursor: pointer;
+    box-shadow: 0 0 rem(32) rgba(0,0,0,.4);
+  }
+}

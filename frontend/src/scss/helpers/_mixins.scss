@@ -1,0 +1,125 @@
+//src/scss/helpers/_mixins.scss
+@use 'sass:math';
+@use 'functions' as *;
+
+@mixin fluid-text($max: 48, $min: 16) {
+
+	font-size: fluid($max, $min);
+}
+
+@mixin hide {
+	// hide прятать
+	opacity: 0;
+	visibility: hidden;
+}
+
+@mixin show {
+	// показывать
+	opacity: 1;
+	visibility: visible;
+}
+
+@mixin flex-center($isInline: false) {
+
+	// Центрирование элементов
+	@if $isInline {
+		display: inline-flex;
+	}
+
+	@else {
+		display: flex;
+	}
+
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin abs-center {
+	// центровка через абсолютное позиционирование.
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+}
+
+@mixin square($size) {
+	// Рисует квадрат с равными значениями
+	width: $size;
+	height: $size;
+}
+
+@mixin visually-hidden {
+	// для визуального сокрытия элемента
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: -1px !important;
+	border: 0 !important;
+	padding: 0 !important;
+	white-space: nowrap !important;
+	clip-path: inset(100%) !important;
+	clip: rect(0 0 0 0) !important;
+	overflow: hidden !important;
+}
+
+// Миксин для кнопки закрытия
+@mixin modal-close-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: rem(24);
+	color: black;
+	width: rem(34);
+	height: rem(34);
+	border-radius: 50%;
+	text-align: center;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+//_____________________________________________________________________
+
+// Миксин hide/show — объединяем в один
+@mixin visibility($state: 'visible') {
+  @if $state == 'hidden' {
+    opacity: 0;
+    visibility: hidden;
+  }
+  @else {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@mixin layout-base() {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .layout__main {
+    flex: 1 0 auto;
+  }
+
+  footer {
+    flex-shrink: 0;
+  }
+}
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+//srs/scss/base/blocks/_hero.scss
+@use '../helpers/index' as *;
+
+/* HERO — полноширинная секция с фоном */
+.hero {
+  background-image: linear-gradient(
+          90deg,
+          rgba(15, 20, 28, 0.85) 0%,
+          rgba(15, 20, 28, 0.65) 38%,
+          rgba(15, 20, 28, 0.25) 58%,
+          rgba(15, 20, 28, 0.00) 72%
+  ),
+  var(--hero);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Полная высота экрана */
+  position: relative;
+  overflow: hidden;
+  display: flex; /* Центрирование контента */
+  justify-content: center; /* По горизонтали */
+  align-items: center; /* По вертикали */
+  text-align: center; /* Центр текста */
+
+  &__inner {
+    width: 100%;
+    max-width: rem(1200);
+    padding-inline: clamp(rem(20), 4vw, rem(48));
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(16);
+    z-index: 1;
+  }
+
+  &__title {
+    @include fluid-text(190, 30);
+    font-family: var(--font-family-h1), serif;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--text_color_fon_light);
+    letter-spacing: rem(28);
+  }
+
+  &__subtitle {
+    @include fluid-text(70, 28);
+    font-family: var(--font-family-h2), serif;
+    font-weight: 700;
+    color: var(--text_color_fon_light);
+    max-width: 60ch;
+  }
+}
+
+
+

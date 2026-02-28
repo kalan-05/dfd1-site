@@ -1,0 +1,34 @@
+@use '../helpers/index' as *;
+
+.doctors {
+  margin: 0 auto;
+
+//  &__title {
+//    text-align: center;
+//    font-weight: 700;
+//    margin-bottom: rem(40);
+//  }
+
+  &__subtitle {
+    text-align: center;
+  }
+
+  &__team_subtitle h4 {
+    text-align: center;
+    margin: var(--space-md) 0 var(--space-md) 0;
+  }
+
+  &__team_img {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-block);
+  }
+
+  &__text_trait {
+    width: 70%;
+    padding-bottom: rem(40);
+    margin: 0 auto;
+  }
+}

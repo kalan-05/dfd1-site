@@ -1,0 +1,198 @@
+@use '../helpers/index' as *;
+/* src/scss/blocks/_reviews.scss */
+
+/* Две колонки, выравнивание нижней линии */
+.reviews-section {
+  overflow-x: clip;
+}
+
+.reviews-system {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 2rem;
+  min-width: 0;
+}
+
+/* Левая колонка: список + навигация снизу */
+.reviews-column {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+/* ОДНА вертикальная колонка карточек */
+.reviews-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+/* Управление видимостью из JS */
+.review-item.is-visible { display: block; }
+.review-item.is-hidden  { display: none;  }
+
+/* Карточка */
+.review-item {
+  background: var(--color-light);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-block);
+  transition: transform .2s ease, box-shadow .2s ease;
+  overflow-wrap: anywhere;
+}
+
+/* Навигация слева внизу */
+.reviews-nav {
+  margin-top: rem(30);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  gap: 0.75rem;
+  justify-content: center;
+  align-self: end;
+}
+.reviews-nav .nav-button,
+.review-form .form-submit {
+  padding: 0.625rem 1rem;
+}
+
+.reviews-nav .nav-button {
+  width: 100%;
+  min-width: 0;
+  padding-inline: 0.5rem;
+  font-size: clamp(0.9rem, 3.2vw, 1rem);
+}
+
+@media (min-width: 769px) {
+  .reviews-nav {
+    display: flex;
+    width: auto;
+    gap: rem(60);
+  }
+
+  .reviews-nav .nav-button {
+    width: auto;
+    min-width: rem(140);
+    padding-inline: 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* Правая колонка — форма; кнопка по одной линии с навигацией слева */
+.review-form {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--color-light);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-block);
+  min-height: 100%;
+  min-width: 0;
+}
+
+.form-title {
+  text-align: center;
+  margin: 0 0 0.75rem 0;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.form-input,
+.form-textarea,
+.review-form select {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: var(--border-input);
+  border-radius: var(--border-radius);
+  background: var(--color-light);
+}
+
+.form-group[data-review-captcha] {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.form-group[data-review-captcha] .h-captcha {
+  max-width: 100%;
+}
+
+.form-group[data-review-captcha] iframe {
+  display: block;
+  max-width: 100%;
+}
+
+.review-form .form-submit {
+  margin-top: rem(15);
+  align-self: end;
+  justify-self: center;
+  padding: 0.75rem 1.25rem;
+}
+
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .reviews-system {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .reviews-nav {
+    margin-top: rem(20);
+    align-self: auto;
+  }
+  .review-form {
+    padding: 1rem;
+  }
+  .form-submit {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .form-group[data-review-captcha] {
+    min-height: 4.5rem;
+  }
+
+  .form-group[data-review-captcha] .h-captcha {
+    transform: scale(0.84);
+    transform-origin: center top;
+  }
+}
+
+@media (max-width: 390px) {
+  .reviews-nav {
+    gap: 0.5rem;
+  }
+
+  .reviews-nav .nav-button {
+    padding-inline: 0.35rem;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @include mobile-md {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* Стиль для звезд */
+.star {
+  font-size: 24px; /* Размер звезды */
+  color: #ccc; /* Цвет пустой звезды по умолчанию */
+  transition: color 0.2s ease; /* Плавное изменение цвета */
+}
+
+.star.filled {
+  color: #ff9800; /* Цвет для заполненных звезд (жёлтый) */
+}
+
+.star.empty {
+  color: #ccc; /* Цвет для пустых звезд (серый) */
+}

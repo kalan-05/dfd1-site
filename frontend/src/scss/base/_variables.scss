@@ -1,0 +1,82 @@
+//src/scss/base/_variables.scss
+
+@use '../helpers/index' as *;
+
+:root {
+  /* ---- Цвет ---- */
+  --color-light: #ffffff;
+
+  /* ---- Фоны Backgrounds---- */
+  --bg-color-body: #F2F6FA; // Основной фон
+  --bg-color-nav: #edf0f0;
+  --bg-color-accent: rgba(254, 254, 255, 0.83);
+  --bg-color-mobile: #edf0f0;
+
+  /* ---- Тексты Text ---- */
+  --color-text-body: #494949; /* Основной текст */
+  --color-text-secondary: #7a7777; /* Второстепенный текст */
+  --text_color_fon_light: #DAC5A7;
+
+  /* ---- Границы border---- */
+  --border: 0.06rem solid #6c5d48;
+  --border-default: 0.06rem solid rgba(90, 85, 73, 0.15);
+  --border-input: 1px solid #dfe3e7;
+
+  /* ---- Скругления border-radius---- */
+  --border-radius: 0.5rem;
+
+  /* ---- Шрифты Fonts---- */
+  --font-family-base: "Montserrat", sans-serif;
+  --font-family-accent: "GothamPro", sans-serif;
+  --font-family-h1: "Highliner-Regular", sans-serif;
+  --font-family-h2: "Kumbh Sans", sans-serif;
+
+  /* ---- Контейнер Container---- */
+  --container-width: #{rem(1400)};
+  --container-padding-x: #{rem(32)};
+
+  /* ---- Время переходов ---- */
+  --transition-duration: 0.2s;
+
+  /* ---- Система отступов (десктоп) ---- */
+  --space-xs: #{rem(4)}; /* 4px — очень маленький отступ */
+  --space-sm: #{rem(8)}; /* 8px — малый отступ */
+  --space-md: #{rem(16)}; /* 16px — средний отступ */
+  --space-lg: #{rem(24)}; /* 24px — большой отступ */
+  --space-xl: #{rem(32)}; /* 32px — очень большой отступ */
+
+  /* ---- Классическая тень для фото ---- */
+  --shadow-photo: 0 12px 32px rgba(0, 0, 0, 0.25);
+  --shadow-btn: 0 8px 24px rgba(0, 0, 0, .2);
+  --shadow-block: 0 2px 8px rgba(0, 0, 0, .06);
+
+  @include laptop-md {
+    --container-width: #{rem(1280)};
+  }
+}
+
+/* ============================================= */
+/* Адаптивные версии отступов для планшетов и мобил */
+/* ============================================= */
+
+/* ----- Планшеты (≤ 992px) ----- */
+@include tablet {
+  :root {
+    --space-xs: #{rem(3)};
+    --space-sm: #{rem(6)};
+    --space-md: #{rem(12)};
+    --space-lg: #{rem(20)};
+    --space-xl: #{rem(28)};
+  }
+}
+
+/* ----- Мобильные устройства (≤ 576px) ----- */
+@include mobile-xs {
+  :root {
+    --space-xs: #{rem(2)};
+    --space-sm: #{rem(4)};
+    --space-md: #{rem(8)};
+    --space-lg: #{rem(16)};
+    --space-xl: #{rem(24)};
+  }
+}

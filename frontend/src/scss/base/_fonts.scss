@@ -1,0 +1,91 @@
+/* Шрифты из public/fonts */
+@font-face {
+  font-family: 'GothamPro';
+  src: url('/fonts/GothamPro-Bold.woff2') format('woff2'); // Один файл — всё ок
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GothamPro';
+  src: url('/fonts/GothamPro-Bold.woff2') format('woff2');
+  font-weight: 700;  // Значение для Bold
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GothamPro';
+  src: url('/fonts/GothamPro-Medium.woff2') format('woff2');
+  font-weight: 500;  // Значение для Medium
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Light.woff2') format('woff2');
+  font-weight: 300;  // Значение для Light
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Medium.woff2') format('woff2');
+  font-weight: 500;  // Значение для Medium
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 400;  // Значение для Regular
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Kumbh Sans";
+  src: url('/fonts/KumbhSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "kumbh Sans";
+  src: url("/fonts/KumbhSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Highliner-Light";
+  src: url("/fonts/Highliner-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Highliner-Regular";
+  src: url("/fonts/Highliner-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Highliner-Bold";
+  src: url("/fonts/Highliner-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+

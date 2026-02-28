@@ -1,0 +1,88 @@
+//@use '../helpers/index' as *;
+//
+//.services-section {
+//.columns {
+//    display: flex;
+//    justify-content: space-between;
+//    gap: 20px;
+//    flex-wrap: wrap;
+//  }
+//
+//  .column {
+//    flex: 1 1 45%; // Две колонки по ~50%, с запасом
+//  }
+//
+//  .diagnostics-list {
+//    list-style-type: decimal;
+//    line-height: 1.6;
+//    padding-left: 20px;
+//  }
+//
+//  li {
+//    margin-bottom: 10px;
+//  }
+//}
+
+@use '../helpers/index' as *;
+
+.services-section {
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(20);
+    flex-wrap: wrap;
+
+    /* [CHANGE][MOBILE-COLUMNS] две → одна колонка */
+    /* [CHANGE][MOBILE-GAP] на мобилке полностью убираем промежуток между колонками */
+    @include mobile-xs {
+      flex-direction: column;
+      gap: 0; /* ← убрать gap на мобильной версии полностью */
+    }
+  }
+
+  .column {
+    flex: 1 1 45%; /* две колонки ~по 50% с запасом */
+
+    @include mobile-xs {
+      flex: 1 1 100%;
+      width: 100%;
+      /* [CHANGE][MOBILE-GAP] исключаем любые внешние зазоры между колонками */
+      margin: 0; /* на всякий случай обнуляем, если где-то задан локально */
+    }
+  }
+
+  .diagnostics-list {
+    list-style-type: decimal;
+    padding-left: rem(20);
+
+    /* [CHANGE][ROW-HEIGHT] единый вертикальный ритм:
+       фиксируем высоту строки, убираем внешние отступы, используем только внутренние */
+    line-height: rem(24); /* одинаковая высота строки у каждой "строчки" текста */
+    margin: 0; /* исключаем влияние margin списка на общий ритм */
+
+    @include mobile-xs {
+      padding-left: rem(20); /* сохраняем читаемость маркеров на мобилке */
+    }
+  }
+
+  li {
+    /* [CHANGE][ROW-HEIGHT] единообразные отступы без "прыжков" */
+    margin: 0;
+    padding: rem(6) 0; /* равномерные внутренние отступы сверху/снизу */
+
+    /* фиксируем line-height у самого элемента на случай локальных переопределений */
+    line-height: rem(24);
+
+    /* Для многострочных пунктов каждая строка всё равно будет rem(24);
+       при этом межпунктный интервал стабилен за счёт padding. */
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: rem(40);
+
+    @include mobile-xs {
+      margin-bottom: rem(24);
+    }
+  }
+}

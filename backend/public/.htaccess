@@ -1,0 +1,51 @@
+# FDC SPA (.htaccess)
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Redirect legacy/test copies to the canonical homepage.
+RewriteCond %{REQUEST_URI} ^/(new|legacy)(/.*)?$ [NC]
+RewriteRule ^ https://ofd1-pavlovmed.ru/ [L,R=301]
+
+# Force canonical scheme + host in a single redirect.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^ofd1-pavlovmed\.ru$ [NC]
+RewriteRule ^ https://ofd1-pavlovmed.ru%{REQUEST_URI} [L,R=301]
+
+# Existing files/directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Service files and PHP endpoints
+RewriteRule ^(robots\.txt|sitemap\.xml)$ - [L]
+RewriteRule ^php/ - [L]
+
+# SPA fallback
+RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/gif "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 6 months"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header set X-Robots-Tag "index, follow"
+
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>

@@ -1,0 +1,31 @@
+//src/scss/main.scss
+
+@use 'base/_fonts';
+@use 'base/_globals';
+@use 'base/_normalize';
+@use 'base/_utils';
+@use 'base/_variables';
+
+/* Swiper CSS из node_modules (только здесь, не в .vue!) */
+@use "swiper/css";
+@use "swiper/css/navigation";
+
+@use 'blocks/header';
+@use 'blocks/footer';
+
+/* ⬇ новые секции */
+@use 'blocks/burger-button';
+@use 'blocks/hero';
+@use 'blocks/about';
+@use 'blocks/gallery';
+@use 'blocks/contact';
+@use 'blocks/services';
+@use 'blocks/reviews';
+@use 'blocks/pricing';
+@use 'blocks/map-section';
+
+
+/* макет: выбери один вариант (flex/grid/fixed) — у тебя уже есть миксин */
+//@include layout-base();
+// @include layout-grid();
+// @include layout-fixed-footer(rem(80));

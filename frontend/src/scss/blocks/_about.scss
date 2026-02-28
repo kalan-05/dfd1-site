@@ -1,0 +1,152 @@
+
+@use '../helpers/index' as *;
+
+/* ================================
+   Блок "О нас"
+   Изменения по мобильному порядку:
+   [CHANGE][MOBILE-ORDER] На mobile-xs во всех .about__blog
+   сначала выводим изображение (.about__img_l / .about__img_r),
+   затем текст (.about__text), не меняя HTML.
+   ================================ */
+
+.about {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  h5 {
+    margin: 0 0 var(--space-md) 0;
+  }
+
+  h6 {
+    margin: var(--space-md) 0;
+  }
+
+  .h2_b1 {
+    margin-top: var(--space-md);
+  }
+
+  &__blog {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    margin: rem(110) 0;
+
+    @include mobile-xs {
+      flex-direction: column;
+      margin: var(--space-xl) 0;
+    }
+  }
+
+  /* [KEEP] Прижимаем текст в первом блоге к верхней границе */
+  .about__blog.blog-1 {
+    display: flex;
+    align-items: flex-start; /* прижимает .text_1 к верху */
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .about__text.text_1 {
+    margin-top: 0;
+  }
+
+  .text__blog {
+    margin-left: rem(20);
+  }
+
+  &__history h5 {
+    margin-top: 0;
+  }
+
+  .blog-2 {
+    @include mobile-xs {
+      flex-direction: column; /* [KEEP] мобильная колонка */
+    }
+  }
+
+  .blog-3 {
+    margin: 0;
+  }
+
+  &__text {
+    width: 70%;
+
+    @include mobile-xs {
+      width: 100%;
+    }
+  }
+
+  .article4 {
+    width: 70%;
+
+    @include mobile-xs {
+      width: 100%;
+    }
+  }
+
+  &-blog {
+    flex-grow: 1;
+    margin: 0;
+    width: 60%;
+  }
+
+  &__img_l,
+  &__img_r {
+    width: 40%;
+
+    @include mobile-xs {
+      width: 85%;
+      max-width: rem(560);
+    }
+  }
+
+  /* Безопасное масштабирование картинок */
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-photo);
+  }
+
+  /* [KEEP] Особенность второй фотографии — "zoom" на десктопе */
+  .photo_2 {
+    width: 150%;
+
+    @include mobile-xs {
+      width: 100%;
+    }
+  }
+
+  /* ======================================
+     [CHANGE][MOBILE-ORDER]
+     Унифицированный порядок на мобильных:
+     1) Сначала изображение (любой контейнер с картинкой)
+     2) Затем текстовый блок
+     Это правило действует для ВСЕХ .about__blog.
+     ====================================== */
+  @include mobile-xs {
+    .about__blog {
+      /* Обе возможные обёртки для изображений в этих блоках */
+      > .about__img_l,
+      > .about__img_r {
+        order: 1; /* фото всегда первым */
+      }
+
+      /* Текстовая колонка */
+      > .about__text {
+        order: 2; /* текст вторым */
+      }
+    }
+  }
+}
+
+

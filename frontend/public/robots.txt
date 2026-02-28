@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /php/
+Disallow: /vendor/
+Disallow: /new/
+Disallow: /legacy/
+
+Sitemap: https://ofd1-pavlovmed.ru/sitemap.xml
+Host: ofd1-pavlovmed.ru

@@ -1,0 +1,139 @@
+//src/scss/base/_globals.scss
+@use '../helpers/index' as *;
+
+html {
+  scroll-behavior: smooth;
+  transition: scroll-behavior 0.2s ease-in-out;
+
+  &.is-lock {
+    overflow: hidden;
+  }
+}
+
+body {
+
+  @include fluid-text(18, 12);
+
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base), serif;
+  letter-spacing: -0.03em;
+  color: var(--color-text-body);
+  background-color: var(--bg-color-body);
+}
+
+// прижимаем footer к низу
+main {
+  flex-grow: 1;
+}
+
+h2, .h2 {
+  margin: var(--space-xl) 0;
+  text-align: center;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3 {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-accent), serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-h2), serif;
+  font-weight: 600;
+  text-transform: uppercase;
+
+}
+
+h1, .h1 {
+  @include fluid-text(70, 30);
+
+  line-height: 1.2;
+}
+
+h2, .h2 {
+  @include fluid-text(58, 28);
+
+  line-height: 1.3;
+}
+
+h3, .h3 {
+  @include fluid-text(30, 20);
+}
+
+h4, .h4 {
+  @include fluid-text(24, 16);
+}
+
+h5, .h5 {
+  @include fluid-text(22, 16);
+}
+
+h6, .h6 {
+  @include fluid-text(20, 16);
+}
+
+p {
+  @include fluid-text(18, 12);
+}
+
+p {
+  --paragraphMarginBottom: #{rem(24)};
+}
+
+.button {
+  background: var(--bg-color-nav);
+  color: var(--color-text-body);
+  border: var(--border-default);
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  line-height: 1; /* выравнивание по вертикали */
+
+  &:hover {
+    box-shadow: var(--shadow-btn);
+    background-color: var(--bg-color-body);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-transform: uppercase;
+  color: inherit;
+  @include hover {
+    color: var(--color-text-body);
+  }
+
+
+  &[class] {
+    text-decoration: none;
+  }
+}
+
+
+
+
+
+

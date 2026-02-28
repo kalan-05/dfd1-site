@@ -1,0 +1,165 @@
+<?php
+
+use App\Http\Controllers\Api\ReviewsController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    $legacyIndex = public_path('legacy-index.html');
+
+    if (is_file($legacyIndex)) {
+        $html = file_get_contents($legacyIndex);
+
+        $captchaConfig = [
+            'siteKey' => (string) config('services.hcaptcha.site_key', ''),
+            'required' => (bool) config('services.hcaptcha.required', false),
+        ];
+
+        $bootstrapScript = '<script>window.__REVIEW_CAPTCHA__ = '
+            . json_encode($captchaConfig, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            . ';</script>';
+
+        $runtimeScript = <<<'HTML'
+<script>
+(function () {
+  var cfg = window.__REVIEW_CAPTCHA__ || {};
+  if (!cfg.siteKey) {
+    return;
+  }
+
+  var widgetId = null;
+  var scriptPromise = null;
+
+  function loadScript() {
+    if (window.hcaptcha && typeof window.hcaptcha.render === 'function') {
+      return Promise.resolve(window.hcaptcha);
+    }
+
+    if (scriptPromise) {
+      return scriptPromise;
+    }
+
+    scriptPromise = new Promise(function (resolve, reject) {
+      var existing = document.getElementById('hcaptcha-script');
+      if (existing) {
+        existing.addEventListener('load', function () { resolve(window.hcaptcha); }, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        return;
+      }
+
+      var script = document.createElement('script');
+      script.id = 'hcaptcha-script';
+      script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = function () { resolve(window.hcaptcha); };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+
+    return scriptPromise;
+  }
+
+  function ensureWidget() {
+    var form = document.getElementById('reviewForm');
+    if (!form || form.dataset.hcaptchaReady === '1') {
+      return;
+    }
+
+    var submitButton = form.querySelector('.form-submit');
+    if (!submitButton) {
+      return;
+    }
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'form-group';
+    var container = document.createElement('div');
+    container.id = 'review-hcaptcha-widget';
+    wrapper.appendChild(container);
+
+    submitButton.parentNode.insertBefore(wrapper, submitButton);
+
+    loadScript()
+      .then(function (hcaptcha) {
+        if (!hcaptcha || typeof hcaptcha.render !== 'function') {
+          throw new Error('hCaptcha API not available');
+        }
+
+        widgetId = hcaptcha.render(container, {
+          sitekey: cfg.siteKey,
+          size: 'normal'
+        });
+
+        form.dataset.hcaptchaReady = '1';
+      })
+      .catch(function (error) {
+        console.error('hCaptcha load error', error);
+      });
+
+    form.addEventListener('submit', function (event) {
+      if (!cfg.required) {
+        return;
+      }
+
+      var token = '';
+      if (window.hcaptcha && typeof window.hcaptcha.getResponse === 'function') {
+        try {
+          token = widgetId !== null ? window.hcaptcha.getResponse(widgetId) : window.hcaptcha.getResponse();
+        } catch (_) {
+          token = '';
+        }
+      }
+
+      if (!token) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        alert('Подтвердите, что вы не робот.');
+        return;
+      }
+
+      var hidden = form.querySelector('input[name="captcha_token"]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'captcha_token';
+        form.appendChild(hidden);
+      }
+      hidden.value = token;
+    }, true);
+
+    form.addEventListener('reset', function () {
+      if (window.hcaptcha && typeof window.hcaptcha.reset === 'function' && widgetId !== null) {
+        window.hcaptcha.reset(widgetId);
+      }
+    });
+  }
+
+  var observer = new MutationObserver(function () {
+    ensureWidget();
+  });
+
+  if (document.body) {
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureWidget, { once: true });
+  } else {
+    ensureWidget();
+  }
+})();
+</script>
+HTML;
+
+        $html = str_replace('</body>', $bootstrapScript . $runtimeScript . '</body>', $html);
+
+        return response($html, 200, [
+            'Content-Type' => 'text/html; charset=UTF-8',
+            'Cache-Control' => 'no-cache, private',
+        ]);
+    }
+
+    return view('welcome');
+});
+
+Route::post('/php/send-review.php', [ReviewsController::class, 'legacyStore'])
+    ->middleware('throttle:reviews-form');

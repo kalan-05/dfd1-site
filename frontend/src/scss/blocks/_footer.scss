@@ -1,0 +1,212 @@
+@use '../helpers/index' as *;
+
+.footer {
+  background: var(--bg-color-nav);
+  border-top: 1px solid rgba(31, 50, 79, 0.12);
+
+  .footer__container {
+    display: grid;
+    grid-template-columns: minmax(0, 20%) minmax(0, 60%) minmax(0, 20%);
+    gap: rem(20);
+    align-items: center;
+    min-height: rem(130);
+    padding: rem(22) 0 rem(24);
+  }
+
+  &__column {
+    min-width: 0;
+  }
+
+  &__column--about {
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+    line-height: 1.35;
+    color: var(--color-title-h2);
+  }
+
+  &__about {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(0.68rem, 0.8vw, 0.75rem);
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  &__column--menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__menu {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: rem(10) rem(18);
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  &__menu-link {
+    color: var(--color-title-h2);
+    font-size: clamp(0.78rem, 0.9vw, 0.92rem);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-text-body);
+      border-bottom-color: rgba(31, 50, 79, 0.35);
+    }
+  }
+
+  &__column--developer {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(4);
+    width: 100%;
+    padding-left: rem(18);
+    border-left: 0;
+    text-decoration: none;
+    color: var(--color-text-body);
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.82;
+    }
+  }
+
+  &__developer {
+    margin: 0;
+    font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+    line-height: 1.3;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__developer-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: rem(8);
+    width: 100%;
+  }
+
+  &__imglogokav {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .logokavweb {
+      display: block;
+      width: 2.25rem;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  &__copy {
+    margin: 0;
+    font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1199.98px) {
+    .footer__container {
+      gap: rem(16);
+    }
+
+    &__menu {
+      gap: rem(8) rem(14);
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .footer__container {
+      grid-template-columns: 1fr;
+      gap: rem(14);
+      padding: rem(18) 0 rem(20);
+    }
+
+    &__column--about {
+      align-items: center;
+    }
+
+    &__column--menu,
+    &__column--developer {
+      justify-content: center;
+    }
+
+    &__menu {
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-x: visible;
+      gap: rem(6) rem(12);
+      white-space: normal;
+      padding-inline: rem(4);
+    }
+
+    &__menu-link {
+      font-size: clamp(0.72rem, 1.8vw, 0.9rem);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    &__link {
+      align-items: center;
+      gap: rem(5);
+      padding-left: 0;
+      padding-top: rem(10);
+      border-left: 0;
+      border-top: 1px solid rgba(31, 50, 79, 0.18);
+    }
+
+    &__developer,
+    &__copy {
+      text-align: center;
+      white-space: normal;
+    }
+
+    &__title,
+    &__about {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    &__title {
+      font-size: clamp(0.75rem, 3.6vw, 0.875rem);
+    }
+
+    &__about {
+      font-size: clamp(0.68rem, 3.2vw, 0.75rem);
+    }
+
+    &__menu-link {
+      font-size: clamp(0.68rem, 3vw, 0.84rem);
+      line-height: 1.15;
+    }
+  }
+}

@@ -1,0 +1,191 @@
+/* src/scss/blocks/_map-section.scss */
+//@use '../helpers/index' as *;
+//
+//.map-section {
+//  margin-top: rem(60);
+//  text-align: center;
+//
+//  &__title {
+//    font-size: rem(28);
+//    font-weight: 600;
+//    margin-bottom: rem(20);
+//  }
+//
+//  &__canvas,
+//  &__fallback {
+//    width: 100%;
+//    height: rem(480);
+//    border-radius: rem(12);
+//    overflow: hidden;
+//    box-shadow: 0 rem(4) rem(20) rgba(0, 0, 0, 0.15);
+//    margin-bottom: rem(20);
+//    /* [NOTE] карта под курсором */
+//    pointer-events: auto;
+//  }
+//
+//  &__info {
+//    font-size: rem(16);
+//    line-height: 1.5;
+//    color: var(--text_color_a);
+//    max-width: rem(700);
+//    margin: 0 auto;
+//
+//    h3 { font-weight: 600; margin-bottom: rem(10); }
+//    p  { margin: rem(5) 0; }
+//  }
+//}
+//
+///* === Бренд-пин (DOM) === */
+//.kav-pin {
+//  position: relative;
+//  width: rem(42);
+//  height: rem(42);
+//  transform: translate(-50%, -100%); /* центр над точкой */
+//  will-change: transform, box-shadow;
+//  transition: transform .2s ease, box-shadow .2s ease;
+//  border-radius: 50%;
+//  background:
+//    radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.75) 40%, rgba(255,255,255,.6) 60%),
+//    var(--brand_pin_bg, #1E2835);
+//  box-shadow: 0 rem(6) rem(18) rgba(0,0,0,.25);
+//
+//  &__stem {
+//    position: absolute;
+//    bottom: rem(-10);
+//    left: 50%;
+//    width: rem(10);
+//    height: rem(12);
+//    background: var(--brand_pin_bg, #1E2835);
+//    border-bottom-left-radius: rem(10);
+//    border-bottom-right-radius: rem(10);
+//    transform: translateX(-50%) rotate(45deg);
+//    filter: drop-shadow(0 rem(2) rem(4) rgba(0,0,0,.2));
+//  }
+//
+//  &__dot {
+//    position: absolute;
+//    top: 50%; left: 50%;
+//    width: rem(10); height: rem(10);
+//    background: #fff;
+//    border-radius: 50%;
+//    transform: translate(-50%, -50%);
+//  }
+//
+//  &__logo {
+//    position: absolute;
+//    inset: 0;
+//    display: grid;
+//    place-items: center;
+//    font-weight: 700;
+//    color: #fff;
+//    font-size: rem(16);
+//    text-shadow: 0 1px 2px rgba(0,0,0,.35);
+//    user-select: none;
+//    pointer-events: none;
+//  }
+//
+//  &__pulse {
+//    position: absolute;
+//    top: 50%; left: 50%;
+//    width: rem(42); height: rem(42);
+//    border: 2px solid rgba(30,40,53,.35);
+//    border-radius: 50%;
+//    transform: translate(-50%, -50%) scale(1);
+//    animation: kav-pin-pulse 2.6s ease-out infinite;
+//  }
+//
+//  &:hover,
+//  &.is-hover {
+//    transform: translate(-50%, -100%) scale(1.07);
+//    box-shadow: 0 rem(10) rem(26) rgba(0,0,0,.28);
+//
+//    .kav-pin__pulse {
+//      animation-duration: 1.6s;
+//      border-color: rgba(30,40,53,.5);
+//    }
+//  }
+//}
+//
+//@keyframes kav-pin-pulse {
+//  0%   { opacity: .55; transform: translate(-50%, -50%) scale(1); }
+//  70%  { opacity: 0;   transform: translate(-50%, -50%) scale(1.8); }
+//  100% { opacity: 0;   transform: translate(-50%, -50%) scale(1.8); }
+//}
+
+
+
+// src/scss/blocks/_map-section.scss
+//@use '../helpers/index' as *;
+//
+//// [NO-CHANGE] Базовая обёртка секции
+//.map-section {
+//  &__map {
+//    width: 100%;
+//    min-height: rem(360); // можно увеличить до rem(480) при необходимости
+//    border-radius: rem(12);
+//    overflow: hidden;
+//    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+//  }
+//
+//  &__fallback {
+//    margin-top: rem(16);
+//    font-size: rem(14);
+//    a {
+//      color: var(--text_color_a);
+//      text-decoration: underline;
+//    }
+//  }
+//}
+
+// src/scss/blocks/_map-section.scss
+//@use '../helpers/index' as *;
+
+// [NO-CHANGE] Базовая обёртка секции
+//.map-section {
+//  &__map {
+//    width: 100%;
+//    min-height: rem(360); // можно увеличить до rem(480) при необходимости
+//    border-radius: rem(12);
+//    overflow: hidden;
+//    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+//  }
+//
+//  &__fallback {
+//    margin-top: rem(16);
+//    font-size: rem(14);
+//    a {
+//      color: var(--text_color_a);
+//      text-decoration: underline;
+//    }
+//  }
+//}
+
+
+// src/scss/blocks/_map-section.scss
+@use '../helpers/index' as *;
+
+// [NO-CHANGE] Базовая обёртка секции
+.map-section {
+  &__map {
+    width: 100%;
+    min-height: rem(480); // можно увеличить до rem(480) при необходимости
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-block);
+    margin-bottom: rem(30);
+  }
+
+  h3, h5 {
+    text-align:  center;
+  }
+
+
+  &__fallback {
+    margin-top: rem(16);
+    font-size: rem(14);
+    a {
+      color: var(--color-text-secondary);
+      text-decoration: underline;
+    }
+  }
+}
